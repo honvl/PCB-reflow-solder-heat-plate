@@ -35,10 +35,11 @@
 #include <EEPROM.h>
 #include <OneWire.h>
 #include <SPI.h>
+#include <SimpleKalmanFilter.h>
 
 // Version Definitions
-static const PROGMEM float hw = 0.9;
-static const PROGMEM float sw = 0.15;
+static const PROGMEM float hw = 1.1;
+static const PROGMEM float sw = 1.1;
 
 // Screen Definitions
 #define SCREEN_WIDTH 128
@@ -69,11 +70,11 @@ volatile unsigned long up_state_change_time = 0;
 volatile unsigned long down_state_change_time = 0;
 
 // Temperature Info
-byte max_temp_array[] = {140, 150, 160, 170, 180};
+byte max_temp_array[] = { 130,135,140,145,150,155 };
 byte max_temp_index = 0;
 #define MAX_RESISTANCE 10.0
-float bed_resistance = 1.88;
-#define MAX_AMPERAGE 5.0
+float bed_resistance = 1.30;
+#define MAX_AMPERAGE 5
 #define PWM_VOLTAGE_SCALAR 2.0
 
 // These values were derived using a regression from real world data.
@@ -175,6 +176,9 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 int sensor_count = 0;
 DeviceAddress temp_addresses[3];
+
+SimpleKalmanFilter tempKalmanFilter(1, 1, 0.01);
+SimpleKalmanFilter voltKalmanFilter(1, 1, 0.01);
 
 #define DEBUG
 
@@ -449,7 +453,7 @@ inline void mainMenu() {
     }
 }
 
-#define BUTTON_PRESS_TIME 50
+#define BUTTON_PRESS_TIME 150
 buttons_state_t getButtonsState() {
     single_button_state_t button_dn;
     single_button_state_t button_up;
@@ -627,10 +631,11 @@ bool heat(byte max_temp, int profile_index) {
         t = getTemp();
         v = getVolts();
         float max_possible_amperage = v / bed_resistance;
-        // TODO(HEIDT) approximate true resistance based on cold resistance and temperature
+        // approximate true resistance based on cold resistance and temperature
         float vmax = (MAX_AMPERAGE * bed_resistance) * PWM_VOLTAGE_SCALAR;
         int min_PWM = 255 - ((vmax * 255.0) / v);
-        min_PWM = constrain(min_PWM, 0, 255);
+        //int min_PWM = 255-((5 * bed_resistance * (0.007*t + 0.92125) /12) * 255);
+        min_PWM = constrain(min_PWM, 1, 255);
         debugprint("Min PWM: ");
         debugprintln(min_PWM);
         debugprintln(bed_resistance);
@@ -641,13 +646,13 @@ bool heat(byte max_temp, int profile_index) {
             ((goal_temp - start_temp) * (time_into_step / step_runtime)) + start_temp, goal_temp);
 
         // TODO(HEIDT) PID for a ramp will always lag, other options may be better
-        stepPID(target_temp, t, last_temp, time_into_step - last_time, min_PWM);
+        float pwmpercent = 100*(1-(stepPID(target_temp, t, last_temp, time_into_step - last_time, min_PWM)/255));
         last_time = time_into_step;
 
         // if we finish the step timewise
         if (time_into_step >= step_runtime) {
-            // and if we're within the goal temperature of the step
-            if (abs(t - goal_temp) < TARGET_TEMP_THRESHOLD) {
+            // and if we're within or above the goal temperature of the step
+            if (goal_temp - t < TARGET_TEMP_THRESHOLD) {
                 // move onto the next step in the profile
                 current_step++;
                 // if that was the last step, we're done!
@@ -665,7 +670,7 @@ bool heat(byte max_temp, int profile_index) {
             }
         }
 
-        heatAnimate(x, y, v, t, target_temp);
+        heatAnimate(x, y, pwmpercent, t, target_temp);
     }
 }
 
@@ -695,7 +700,7 @@ void evaluate_heat() {
     analogWrite(MOSFET_PIN, MOSFET_PIN_OFF);
 }
 
-void stepPID(float target_temp, float current_temp, float last_temp, float dt, int min_pwm) {
+float stepPID(float target_temp, float current_temp, float last_temp, float dt, int min_pwm) {
     float error = target_temp - current_temp;
     float D = (current_temp - last_temp) / dt;
 
@@ -704,8 +709,13 @@ void stepPID(float target_temp, float current_temp, float last_temp, float dt, i
 
     // PWM is inverted so 0 duty is 100% power
     float PWM = 255.0 - (error * kP + D * kD + error_I);
-    PWM = constrain(PWM, min_pwm, 255);
-
+    if (current_temp > target_temp){
+    PWM = 255;
+    }
+    else if (current_temp < 90){
+    PWM = constrain(PWM, min_pwm, 40);
+    }
+    else PWM = constrain(PWM,min_pwm,255);
     debugprintln("PID");
     debugprintln(dt);
     debugprintln(error);
@@ -713,6 +723,7 @@ void stepPID(float target_temp, float current_temp, float last_temp, float dt, i
     debugprint("PWM: ");
     debugprintln(PWM);
     analogWrite(MOSFET_PIN, (int)PWM);
+    return(PWM);
 }
 
 void inline heatAnimate(int &x, int &y, float v, float t, float target) {
@@ -731,9 +742,8 @@ void inline heatAnimate(int &x, int &y, float v, float t, float target) {
     display.print(F("HEATING"));
     display.setTextSize(1);
     display.setCursor(20, 24);
-    display.print(F("~"));
     display.print(v, 1);
-    display.print(F("V"));
+    display.print(F("%"));
     if (t >= 100) {
         display.setCursor(63, 24);
     } else if (t >= 10) {
@@ -868,14 +878,13 @@ float getTemp() {
     // conversion to temp, consult datasheet:
     // https://www.ti.com/document-viewer/LMT85/datasheet/detailed-description#snis1681040
     // this is optimized for 25C to 150C
-    // TODO(HEIDT) this is linearized and innacurate, could probably use the nonlinear
-    // functions without much overhead.
-    t = (t - 1.365) / ((.301 - 1.365) / (150.0 - 25.0)) + 25.0;
 
+    t = (t - 1.365) / ((.301 - 1.365) / (150.0 - 25.0)) + 25.0;
+    //t = (8.194-sqrt(pow(8.194,2)+4*0.00262*(1324-t)))/(2*-0.00262)+30;
     // The analog sensor is too far from the bed for an accurate reading
     // this simple function estimates the true bed temperature based off the thermal
     // gradient 
-    float estimated_temp = t*ANALOG_APPROXIMATION_SCALAR + ANALOG_APPROXIMATION_OFFSET;
+    float estimated_temp = tempKalmanFilter.updateEstimate(t*ANALOG_APPROXIMATION_SCALAR + ANALOG_APPROXIMATION_OFFSET);
     debugprint(estimated_temp);
     debugprint(" ");
 
