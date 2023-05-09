@@ -167,7 +167,7 @@ const static solder_profile_t profiles[NUM_PROFILES] = {
 // PID values
 float kI = 0.2;
 float kD = 0.25;
-float kP = 8.0;
+float kP = 4.0;
 float I_clip = 220;
 float error_I = 0;
 
@@ -708,11 +708,12 @@ float stepPID(float target_temp, float current_temp, float last_temp, float dt, 
     error_I = constrain(error_I, 0, I_clip);
 
     // PWM is inverted so 0 duty is 100% power
-    float PWM = 255.0 - (error * kP + D * kD + error_I);
-    if (current_temp > target_temp){
-    PWM = 255;
+    float PWM = 0;
+    if (error > -2.5){
+    PWM = 255.0 - (error * kP + D * kD + error_I);
     }
-    else if (current_temp < 90){
+    else PWM = 255.0 - (error * kP + error_I);
+    if (current_temp < 90){
     PWM = constrain(PWM, min_pwm, 40);
     }
     else PWM = constrain(PWM,min_pwm,255);
@@ -910,7 +911,7 @@ float getVolts() {
     float vin = (v / 1023.0) * 1.5;
     debugprint("voltage at term: ");
     debugprintln(vin);
-    vin = (vin / 0.090981) + 0.3;
+    vin = voltKalmanFilter.updateEstimate((vin / 0.090981) + 0.3);
     return vin;
 }
 
