@@ -4,10 +4,6 @@
 
 The PCB reflow solder heat plate can be used to solder small PCBs with SMD parts. The user can control the maximum temperature and heating curve.
 
-## Differences from DerSpatz fork
-
-Faster ramp up, lower and finer temperature settings, less temperature overshoot, 12V/5A power supply won't overload and reset.
-
 ## Hardware design
 
 The idea for this design comes from https://github.com/AfterEarthLTD/Solder-Reflow-Plate. But when I checked the original design, I found some issues that could cause safety problems and other design choices that are not optimal.
@@ -33,7 +29,7 @@ The idea for this design comes from https://github.com/AfterEarthLTD/Solder-Refl
 
 ### Building your own
 
-You can order it assembled from PCBWay or JLCPCB. Only the OLED display and the power supply need to be sourced elsewhere. The BOM includes LCSC part numbers for hand soldering and their automated SMT manufacturing. Minimal part size is 0805 and there's enough space between all solder pads, so hand soldering should be no problem if you have a steady hand. Hardest part will be the MCU, but this is hand solderable, too.
+You can order almost all parts needed from LCSC/JLCPCB. Only the OLED display and the power supply need to be sourced elsewhere. The BOM includes LCSC part numbers for hand soldering and their automated SMT manufacturing. Minimal part size is 0805 and there's enough space between all solder pads, so hand soldering should be no problem if you have a steady hand. Hardest part will be the MCU, but this is hand solderable, too.
 
 ### Safety measures compared to the original design
 
@@ -56,6 +52,7 @@ Daniel Oltmanns (https://github.com/oltdaniel) is doing a rework of the firmware
 - better working buttons
 - calibration function for the analog temperature sensor by taping a digital probe directly to the heat plate
 
+Please note that I can only do hardware design, so I can't contribute anything to the software. 
 
 ### Programming the MCU
 

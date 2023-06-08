@@ -1,6 +1,6 @@
 /* Solder Reflow Plate Sketch
- *  H/W - Ver Spatz-1.0
- *  S/W - Ver 0.35
+ *  H/W - Ver Spatz-1.1
+ *  S/W - Ver 1.1
  *  by Chris Halsall and Nathan Heidt     */
 
 /* To prepare
