@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>C:\Users\Honver\Documents\PCB\PCB-reflow-solder-heat-plate\Heatplate_v1.2\Heatplate_v1.2.kicad_sch</source>
-    <date>6/8/2023 2:31:28 PM</date>
+    <date>6/8/2023 3:18:19 PM</date>
     <tool>Eeschema 7.0.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -65,11 +65,11 @@
       <footprint>Capacitor_SMD:CP_Elec_8x10</footprint>
       <fields>
         <field name="Information">ripple current &gt; 1A</field>
-        <field name="LCSC Part Number">C442884</field>
+        <field name="LCSC Part Number">C882163</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Information" value="ripple current &gt; 1A"/>
-      <property name="LCSC Part Number" value="C442884"/>
+      <property name="LCSC Part Number" value="C882163"/>
       <property name="LCSC Part Number Alternative" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Heatplate_v1.2.kicad_sch"/>
@@ -83,11 +83,11 @@
       <footprint>Capacitor_SMD:CP_Elec_8x10</footprint>
       <fields>
         <field name="Information">ripple current &gt; 1A</field>
-        <field name="LCSC Part Number">C442884</field>
+        <field name="LCSC Part Number">C882163</field>
       </fields>
       <libsource lib="Device" part="C_Polarized_Small" description="Polarized capacitor, small symbol"/>
       <property name="Information" value="ripple current &gt; 1A"/>
-      <property name="LCSC Part Number" value="C442884"/>
+      <property name="LCSC Part Number" value="C882163"/>
       <property name="LCSC Part Number Alternative" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="Heatplate_v1.2.kicad_sch"/>

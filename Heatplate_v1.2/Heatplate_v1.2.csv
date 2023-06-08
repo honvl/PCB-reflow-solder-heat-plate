@@ -1,6 +1,6 @@
 Comment,Designator,Footprint,LCSC Part #
 "10u Unpolarized capacitor, small symbol",C1,C_0805_2012Metric,C162422
-"100-680u/35V Polarized capacitor, small symbol","C2,C5",CP_Elec_8x10,C442884
+"100-680u/35V Polarized capacitor, small symbol","C2,C5",CP_Elec_8x10,C882163
 "22u/35V Polarized capacitor, small symbol","C6,C7",CP_Elec_5x5.4,C239256
 "470pF Unpolarized capacitor, small symbol",C8,C_0805_2012Metric,C1743
 "100nF Unpolarized capacitor, small symbol","C9,C10,C11,C12,C13",C_0805_2012Metric,C1711
