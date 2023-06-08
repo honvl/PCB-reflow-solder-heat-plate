@@ -8,11 +8,17 @@ The PCB reflow solder heat plate can be used to solder small PCBs with SMD parts
 
 The idea for this design comes from https://github.com/AfterEarthLTD/Solder-Reflow-Plate. But when I checked the original design, I found some issues that could cause safety problems and other design choices that are not optimal.
 
+## Hardware version 1.2
+
+- Removed resettable fuse
+- Increased power supply capacitor ratings to 35V for 24V power supply compatibility
+- Use 2 SMD capacitors for power supply capacitors instead of 4 standard ones
+- Changed to easier to press switches
+
 ### Feature list
 
 - PCB size 100x100mm, heat plate size 81x69mm
 - DC barrel plug (5.5x2.5mm), runs with 12V/5A power supply
-- resettable 5A PTC fuse
 - inrush current limiter to protect power supply when capacitors are discharged
 - 2.7mF input power filter for smooth current draw
 - capacitor discharging resistors
