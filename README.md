@@ -12,7 +12,7 @@ The idea for this design comes from https://github.com/AfterEarthLTD/Solder-Refl
 
 - Removed resettable fuse which was overheating and tripping
 - Increased power supply capacitor ratings to 35V for 24V power supply compatibility
-- Use 2 SMD capacitors for power supply capacitors instead of 4 standard ones
+- Use 2 SMD capacitors for power supply capacitors instead of 4 standard ones for lower total board height
 - Changed to easier to press switches
 
 ### Feature list
