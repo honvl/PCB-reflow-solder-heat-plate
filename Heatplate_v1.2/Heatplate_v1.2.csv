@@ -1,0 +1,26 @@
+Comment,Designator,Footprint,LCSC Part #
+"10u Unpolarized capacitor, small symbol",C1,C_0805_2012Metric,C162422
+"100-680u/35V Polarized capacitor, small symbol","C2,C5",CP_Elec_8x10,C442884
+"22u/35V Polarized capacitor, small symbol","C6,C7",CP_Elec_5x5.4,C239256
+"470pF Unpolarized capacitor, small symbol",C8,C_0805_2012Metric,C1743
+"100nF Unpolarized capacitor, small symbol","C9,C10,C11,C12,C13",C_0805_2012Metric,C1711
+"B5819W Diode, small symbol, filled shape","D1,D2,D3,D4",D_SOD-123,C64885
+M3 Mounting Hole without connection,"H1,H2,H3,H4",MountingHole_3.2mm_M3,C551332
+Barrel_Jack_Switch DC Barrel Jack with an internal switch,J1,BarrelJack_Horizontal,C381115
+"RED/GREEN Light emitting diode, small symbol, filled shape",LED1,LED_Avago_PLCC4_3.2x2.8mm_CW,C131251
+SSD1306 SSD1306 OLED,OLED1,0.91Inch-OLED-Module,C2718488
+"WSP4409A N-MOSFET transistor, drain/gate/source",Q1,SOIC-8_3.9x4.9mm_P1.27mm,C2880527
+"IRLR8726TRPBF N-MOSFET transistor, gate/drain/source",Q2,TO-252-2,C81137
+"SS8050 NPN transistor, base/emitter/collector",Q3,SOT-23,C444722
+"47 Resistor, small symbol","R1,R2",R_0805_2012Metric,C17714
+"1k Resistor, small symbol","R3,R5,R6,R7",R_0805_2012Metric,C17513
+"4k7 Resistor, small symbol","R4,R8,R9,R10",R_0805_2012Metric,C17673
+"10k Resistor, small symbol","R11,R12,R13,R14,R15",R_0805_2012Metric,C17414
+"SW_Push Push button switch, generic, two pins","SW1,SW2",SW_PUSH_6mm,C93151
+"LMT85 Precision centigrade temperature sensor, TO-92",TEMP1,TO-92_Inline,C75856
+DS18B20Z Programmable Resolution 1-Wire Digital Thermometer SOIC-8,TEMP2,SOIC-8_3.9x4.9mm_P1.27mm,C695837
+Ext. 1-Wire Programmable Resolution 1-Wire Digital Thermometer TO-92,TEMP3,PinHeader_1x03_P2.54mm_Vertical,
+TestPoint test point,"TP1,TP2,TP3",TestPoint_Pad_D1.5mm,
+"ATMEGA4809-AFR MICROCHIP - ATMEGA4809-AFR - MCU, 8BIT, ATMEGA, 20MHZ, TQFP-48",U1,TQFP-48_7x7mm_P0.5mm,C189475
+"AMS1117-5.0 1A Low Dropout regulator, positive, 5.0V fixed output, SOT-223",U2,SOT-89-3,C351450
+"1x03_2.54mm Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",UPDI1,PinHeader_1x03_P2.54mm_Vertical,C49257
