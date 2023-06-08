@@ -1,0 +1,22 @@
+"null","Sourced","Placed","References","Value","Footprint","Assembly","LCSC Part Number","Description","Quantity"
+1,"","","C9, C10, C11, C12, C13","100nF","C_0805_2012Metric","","C1711","Unpolarized capacitor, small symbol",5
+2,"","","C2, C5","100-680u/35V","CP_Elec_8x10","","C442884","Polarized capacitor, small symbol",2
+3,"","","C6, C7","22u/35V","CP_Elec_5x5.4","","C239256","Polarized capacitor, small symbol",2
+4,"","","C1","10u","C_0805_2012Metric","","C162422","Unpolarized capacitor, small symbol",1
+5,"","","C8","470pF","C_0805_2012Metric","","C1743","Unpolarized capacitor, small symbol",1
+6,"","","R11, R12, R13, R14, R15","10k","R_0805_2012Metric","","C17414","Resistor, small symbol",5
+7,"","","R3, R5, R6, R7","1k","R_0805_2012Metric","","C17513","Resistor, small symbol",4
+8,"","","R4, R8, R9, R10","4k7","R_0805_2012Metric","","C17673","Resistor, small symbol",4
+9,"","","R1, R2",47,"R_0805_2012Metric","","C17714","Resistor, small symbol",2
+10,"","","D1, D2, D3, D4","B5819W","D_SOD-123","","C64885","Diode, small symbol, filled shape",4
+11,"","","U1","ATMEGA4809-AFR","TQFP-48_7x7mm_P0.5mm","","C189475","MICROCHIP - ATMEGA4809-AFR - MCU, 8BIT, ATMEGA, 20MHZ, TQFP-48",1
+12,"","","U2","AMS1117-5.0","SOT-89-3","","C351450","1A Low Dropout regulator, positive, 5.0V fixed output, SOT-223",1
+13,"","","SW1, SW2","SW_Push","SW_PUSH_6mm","","C93151","Push button switch, generic, two pins",2
+14,"","","H1, H2, H3, H4","M3","MountingHole_3.2mm_M3","","C551332","Mounting Hole without connection",4
+15,"","","LED1","RED/GREEN","LED_Avago_PLCC4_3.2x2.8mm_CW","","C131251","Light emitting diode, small symbol, filled shape",1
+16,"","","OLED1","SSD1306","0.91Inch-OLED-Module","","C2718488","SSD1306 OLED",1
+17,"","","Q1","WSP4409A","SOIC-8_3.9x4.9mm_P1.27mm","","C2880527","N-MOSFET transistor, drain/gate/source",1
+18,"","","Q2","IRLR8726TRPBF","TO-252-2","","C81137","N-MOSFET transistor, gate/drain/source",1
+19,"","","Q3","SS8050","SOT-23","","C444722","NPN transistor, base/emitter/collector",1
+20,"","","TEMP1","LMT85","TO-92_Inline","","C75856","Precision centigrade temperature sensor, TO-92",1
+21,"","","J1","Barrel_Jack_Switch","BarrelJack_Horizontal","","C381115","DC Barrel Jack with an internal switch",1
