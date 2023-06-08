@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The PCB reflow solder heat plate can be used to solder small PCBs with SMD parts. The user can control the maximum temperature and heating curve.
+The PCB reflow solder heat plate can be used to solder small PCBs with SMD parts. The user can control the maximum temperature and heating curve. Buy a pre-assembled version here: https://www.tindie.com/products/littlethings/pcb-reflow-soldering-hot-plate/
 
 ## Hardware design
 
